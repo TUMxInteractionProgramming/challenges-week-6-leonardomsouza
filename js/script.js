@@ -286,18 +286,26 @@ function listChannels(criterion) {
     // #10 #sorting #duplicate: empty list
     $('#channels ul').empty();
 
-    $(currentChannel).addClass('selected');
+    
+    // /* #10 append channels from #array with a #for loop */
+    // for (i = 0; i < channels.length; i++) {
+    //     $('#channels ul').append(createChannelElement(channels[i]));
+    //     if (channels[i]==currentChannel){
+    //         $(channels[i]).addClass('selected');
+    //         //debugger;
+    //     }
+        
+    // };
 
-    /* #10 append channels from #array with a #for loop */
     for (i = 0; i < channels.length; i++) {
-        $('#channels ul').append(createChannelElement(channels[i]));
+        var channelElement = createChannelElement(channels[i]);
         if (channels[i]==currentChannel){
-            $(channels[i]).addClass('selected');
-            //debugger;
+            channelElement.addClass('selected');
+            //Aonde eu insiro a info?
         }
+        $('#channels ul').append(channelElement);
         
     };
-
    
     
 
