@@ -5,10 +5,15 @@ console.log("App is alive");
 
 // $(document).ready(listChannels(compareNew); loadEmojis())
 
+//Setting interval to every ten seconds
+
+
+//Initializing code
 $(function() {
     listChannels(compareNew); 
     loadEmojis();
     console.log("App is initialized");
+    setInterval(function(){console.log("Updating message elements..."); }, 10000);
 });
 
 /** #10 global #array of channels #arr*/
@@ -237,6 +242,7 @@ function createMessageElement(messageObject) {
     //Creating button and adding it to the message
     $('<button>').addClass('accent').text('+5 min.').appendTo(message);
 
+    //$(message).appendTo(currentChannel.messages);
 
     return message;
 
