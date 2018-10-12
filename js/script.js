@@ -5,13 +5,14 @@ console.log("App is alive");
 
 // $(document).ready(listChannels(compareNew); loadEmojis())
 
+//Setting interval to every ten seconds
+
 
 //Initializing code
 $(function() {
     listChannels(compareNew); 
     loadEmojis();
     console.log("App is initialized");
-    //Setting interval to every ten second
     setInterval(function(){console.log("Updating message elements..."); }, 10000);
 });
 
@@ -311,7 +312,11 @@ function listChannels(criterion) {
             //debugger;
         }
         
-    }; 
+    };
+
+   
+    
+
 
 }
 
