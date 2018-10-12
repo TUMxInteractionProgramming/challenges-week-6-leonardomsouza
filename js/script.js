@@ -184,19 +184,19 @@ function createMessageElement(messageObject) {
     // Calculating the expiresIn-time from the expiresOn-property
     var expiresIn = Math.round((messageObject.expiresOn - Date.now()) / 1000 / 60);
 
-    // Creating a message-element
-    return '<div class="message'+
-        //this dynamically adds #own to the #message, based on the
-        //ternary operator. We need () in order not to disrupt the return.
-        (messageObject.own ? ' own' : '') +
-        '">' +
-        '<h3><a href="http://w3w.co/' + messageObject.createdBy + '" target="_blank">'+
-        '<strong>' + messageObject.createdBy + '</strong></a>' +
-        messageObject.createdOn.toLocaleString() +
-        '<em>' + expiresIn + ' min. left</em></h3>' +
-        '<p>' + messageObject.text + '</p>' +
-        '<button class="accent">+5 min.</button>' +
-        '</div>';
+    // // Creating a message-element
+    // return '<div class="message'+
+    //     //this dynamically adds #own to the #message, based on the
+    //     //ternary operator. We need () in order not to disrupt the return.
+    //     (messageObject.own ? ' own' : '') +
+    //     '">' +
+    //     '<h3><a href="http://w3w.co/' + messageObject.createdBy + '" target="_blank">'+
+    //     '<strong>' + messageObject.createdBy + '</strong></a>' +
+    //     messageObject.createdOn.toLocaleString() +
+    //     '<em>' + expiresIn + ' min. left</em></h3>' +
+    //     '<p>' + messageObject.text + '</p>' +
+    //     '<button class="accent">+5 min.</button>' +
+    //     '</div>';
 
     /*
     <div class="message own">
@@ -216,54 +216,29 @@ function createMessageElement(messageObject) {
     var message = $('<div>').addClass('message').addClass(messageObject.own ? ' own' : '');
 
     //Creating the h3 and appending it to message
-    var content = $('<h3>').appendTo(message);
+    var meta = $('<h3>').appendTo(message);
 
-
-    //adding class in the div
-
-
-
-
-
-    /* this HTML is build in jQuery below:
-     <li>
-     {{ name }}
-        <span class="channel-meta">
-            <i class="far fa-star"></i>
-            <i class="fas fa-chevron-right"></i>
-        </span>
-     </li>
-     */
-
-    // create a channel
-    var channel = $('<li>').text(channelObject.name);
+    //Creating the created section and appending it to meta
+    //var created = $('<a>').attr('href="http://w3w.co/' + messageObject.createdBy +'"').appendTo(meta);
+    var created = $('<a>').attr( "href", "http://w3w.co/" + messageObject.createdBy +'"').appendTo(meta);
     
+    //Creating text and adding it to the created section
+    $('<strong>').text(messageObject.createdBy).appendTo(created);
 
-    // create and append channel meta
-    var meta = $('<span>').addClass('channel-meta').appendTo(channel);
+    //Adding the internal html to the meta
+    $().html(messageObject.createdOn.toLocaleString()).appendTo(meta);
 
-    // The star including star functionality.
-    // Since we don't need any further children, we don't need any variables (references)
-    $('<i>').addClass('fa-star').addClass(channelObject.starred ? 'fas' : 'far').appendTo(meta);
+    //Creating em area and adding it to the meta
+    $('<em>').text(expiresIn + 'min.' + 'left').appendTo(meta);
 
-    // boxes for some additional metadata
-    $('<span>').text(channelObject.expiresIn + ' min').appendTo(meta);
-    $('<span>').text(channelObject.messageCount + ' new').appendTo(meta);
+    //Creating p section and adding it to the message
+    $('<p>').text(messageObject.text).appendTo(message);
 
-    // The chevron
-    $('<i>').addClass('fas').addClass('fa-chevron-right').appendTo(meta);
+    //Creating button and adding it to the message
+    $('<button>').addClass('accent').text('+5 min.').appendTo(message);
 
-    $(channel).click("click", function(){
-        switchChannel(channelObject, $(this));
-    });
 
-    //Testing using the click event
-   /* $.click(function() {
-        alert( "Handler for .click() called." );
-    });*/
-
-    // return the complete channel
-    return channel;
+    return message;
 
 }
 
