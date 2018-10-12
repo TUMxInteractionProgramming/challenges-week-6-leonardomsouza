@@ -27,7 +27,7 @@ var currentLocation = {
  * Switch channels name in the right app bar
  * @param channelObject
  */
-function switchChannel(channelObject) {
+function switchChannel(channelObject, channelElement) {
     // Log the channel switch
     console.log("Tuning in to channel", channelObject);
 
@@ -52,7 +52,13 @@ function switchChannel(channelObject) {
     /* highlight the selected #channel.
        This is inefficient (jQuery has to search all channel list items), but we'll change it later on */
     $('#channels li').removeClass('selected');
-    $('#channels li:contains(' + channelObject.name + ')').addClass('selected');
+    // $('#channels li:contains(' + channelObject.name + ')').addClass('selected');
+    
+    $(channelElement).addClass('selected');
+
+    $('#messages').empty();
+    showMessages(channelObject);
+    
 
     /* store selected channel in global variable */
     currentChannel = channelObject;
@@ -221,10 +227,22 @@ function listChannels(criterion) {
     // #10 #sorting #duplicate: empty list
     $('#channels ul').empty();
 
+    $(currentChannel).addClass('selected');
+
     /* #10 append channels from #array with a #for loop */
     for (i = 0; i < channels.length; i++) {
         $('#channels ul').append(createChannelElement(channels[i]));
+        if (channels[i]==currentChannel){
+            $(channels[i]).addClass('selected');
+            //debugger;
+        }
+        
     };
+
+   
+    
+
+
 }
 
 /**
@@ -310,6 +328,7 @@ function createChannelElement(channelObject) {
 
     // create a channel
     var channel = $('<li>').text(channelObject.name);
+    
 
     // create and append channel meta
     var meta = $('<span>').addClass('channel-meta').appendTo(channel);
@@ -324,6 +343,15 @@ function createChannelElement(channelObject) {
 
     // The chevron
     $('<i>').addClass('fas').addClass('fa-chevron-right').appendTo(meta);
+
+    $(channel).click("click", function(){
+        switchChannel(channelObject, $(this));
+    });
+
+    //Testing using the click event
+   /* $.click(function() {
+        alert( "Handler for .click() called." );
+    });*/
 
     // return the complete channel
     return channel;
@@ -354,4 +382,23 @@ function abortCreationMode() {
     $('#app-bar-create').removeClass('show');
     $('#button-create').hide();
     $('#button-send').show();
+}
+
+function showMessages(channelObject){
+
+    //debugger;
+    $.each(channelObject.messages, function(index, message){
+     
+        // Adding the message to the messages-div
+        $('#messages').append(createMessageElement(message));
+
+        // messages will scroll to a certain point if we apply a certain height, in this case the overall scrollHeight of the messages-div that increases with every message;
+        $('#messages').scrollTop($('#messages').prop('scrollHeight'));
+
+        // clear the #message input
+        $('#message').val('');
+        //debugger;
+    });
+    //debugger;
+    
 }
