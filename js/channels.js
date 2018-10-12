@@ -66,7 +66,7 @@ var firstpersononmars = {
     starred: true,
     expiresIn: 30003,
     messageCount: 2424,
-    messages : [dummyMessage1, dummyMessage3]           // #10 #message s property in #chl object
+    messages : [dummyMessage2, dummyMessage1, dummyMessage3]           // #10 #message s property in #chl object
 
 };
 

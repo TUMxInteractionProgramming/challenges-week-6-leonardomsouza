@@ -1,6 +1,16 @@
 /* start the external action and say hello */
 console.log("App is alive");
 
+// listChannels(compareNew); loadEmojis()
+
+// $(document).ready(listChannels(compareNew); loadEmojis())
+
+$(function() {
+    listChannels(compareNew); 
+    loadEmojis();
+    console.log("App is initialized");
+});
+
 /** #10 global #array of channels #arr*/
 var channels = [
     yummy,
