@@ -197,6 +197,74 @@ function createMessageElement(messageObject) {
         '<p>' + messageObject.text + '</p>' +
         '<button class="accent">+5 min.</button>' +
         '</div>';
+
+    /*
+    <div class="message own">
+        <h3>
+            <a href="http://w3w.co/createdby target="_blank">
+                <strong> messageObject.createdBy </strong>
+            </a>
+            messageObject.createdOn.toLocaleString()
+            <em> expiresIn min. left</em>
+        </h3>
+        <p> messageObject.text </p>
+        <button class="accent">+5 min.</button>
+    </div>
+    */
+
+    //Creating the div and adding class in the div
+    var message = $('<div>').addClass('message').addClass(messageObject.own ? ' own' : '');
+
+    //Creating the h3 and appending it to message
+    var content = $('<h3>').appendTo(message);
+
+
+    //adding class in the div
+
+
+
+
+
+    /* this HTML is build in jQuery below:
+     <li>
+     {{ name }}
+        <span class="channel-meta">
+            <i class="far fa-star"></i>
+            <i class="fas fa-chevron-right"></i>
+        </span>
+     </li>
+     */
+
+    // create a channel
+    var channel = $('<li>').text(channelObject.name);
+    
+
+    // create and append channel meta
+    var meta = $('<span>').addClass('channel-meta').appendTo(channel);
+
+    // The star including star functionality.
+    // Since we don't need any further children, we don't need any variables (references)
+    $('<i>').addClass('fa-star').addClass(channelObject.starred ? 'fas' : 'far').appendTo(meta);
+
+    // boxes for some additional metadata
+    $('<span>').text(channelObject.expiresIn + ' min').appendTo(meta);
+    $('<span>').text(channelObject.messageCount + ' new').appendTo(meta);
+
+    // The chevron
+    $('<i>').addClass('fas').addClass('fa-chevron-right').appendTo(meta);
+
+    $(channel).click("click", function(){
+        switchChannel(channelObject, $(this));
+    });
+
+    //Testing using the click event
+   /* $.click(function() {
+        alert( "Handler for .click() called." );
+    });*/
+
+    // return the complete channel
+    return channel;
+
 }
 
 /* #10 Three #compare functions to #sort channels */
