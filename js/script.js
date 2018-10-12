@@ -189,7 +189,6 @@ function createMessageElement(messageObject) {
     // Calculating the expiresIn-time from the expiresOn-property
     var expiresIn = Math.round((messageObject.expiresOn - Date.now()) / 1000 / 60);
 
-<<<<<<< HEAD
     // // Creating a message-element
     // return '<div class="message'+
     //     //this dynamically adds #own to the #message, based on the
@@ -247,21 +246,6 @@ function createMessageElement(messageObject) {
 
     return message;
 
-=======
-    // Creating a message-element
-    return '<div class="message'+
-        //this dynamically adds #own to the #message, based on the
-        //ternary operator. We need () in order not to disrupt the return.
-        (messageObject.own ? ' own' : '') +
-        '">' +
-        '<h3><a href="http://w3w.co/' + messageObject.createdBy + '" target="_blank">'+
-        '<strong>' + messageObject.createdBy + '</strong></a>' +
-        messageObject.createdOn.toLocaleString() +
-        '<em>' + expiresIn + ' min. left</em></h3>' +
-        '<p>' + messageObject.text + '</p>' +
-        '<button class="accent">+5 min.</button>' +
-        '</div>';
->>>>>>> parent of d51f00b... Challenge 11
 }
 
 /* #10 Three #compare functions to #sort channels */
